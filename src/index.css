@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './modal.css';
+
+:root {
+  /* Light Theme Colors */
+  --bg-app: #F6F7FB;
+  --bg-card: #FFFFFF;
+  --border-card: #E4E7EC;
+  --text-primary: #101828;
+  --text-secondary: #667085;
+  --brand-indigo: #465FFF;
+  --brand-tint: #EEF2FF;
+  
+  --color-success: #12B76A;
+  --color-warning: #F79009;
+  --color-danger: #F04438;
+
+  --radius-card: 16px;
+  --radius-sheet: 12px;
+  --radius-btn: 10px;
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme='dark'] {
+  /* Dark Theme Colors */
+  --bg-app: #101828;
+  --bg-card: #182230;
+  --border-card: #344054;
+  --text-primary: #F9FAFB;
+  --text-secondary: #98A2B3;
+  --brand-indigo: #8098FF;
+  --brand-tint: rgba(128, 152, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography Utilities */
+.text-money {
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+@media (min-width: 768px) {
+  .text-money { font-size: 34px; }
+}
+
+.text-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .text-title { font-size: 28px; }
+}
+
+.text-heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .text-heading { font-size: 20px; }
+}
+
+.text-body {
+  font-size: 14px;
+  font-weight: 400;
+}
+@media (min-width: 768px) {
+  .text-body { font-size: 16px; }
+}
+
+.text-meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+@media (min-width: 768px) {
+  .text-meta { font-size: 14px; }
+}
+
+/* Utility Classes */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.1s;
+  min-height: 44px; /* Touch target size */
+  font-size: 16px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--brand-indigo);
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-card);
+}
+
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.w-full { width: 100%; }
+
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-brand { color: var(--brand-indigo); }
+.text-secondary { color: var(--text-secondary); }
+.text-center { text-align: center; }
+
+/* Layout Shell */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  #root {
+    flex-direction: row;
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 16px 16px 80px 16px; /* Bottom padding for nav */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: 32px;
+  }
+}
+
+/* Privacy Masking */
+.privacy-mask {
+  filter: blur(6px);
+  user-select: none;
+  opacity: 0.7;
+}
+
+/* Sidebar (Desktop) */
+.sidebar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-card);
+    padding: 24px 16px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+.sidebar-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  padding: 0 16px;
+}
+
+/* Bottom Navigation (Mobile) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  z-index: 50;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .nav-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 16px;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.nav-item:hover {
+  background-color: var(--brand-tint);
+}
+
+.nav-item.active {
+  color: var(--brand-indigo);
+  background-color: var(--brand-tint);
+}
+
+/* Budget State Colors */
+.bg-healthy { background-color: var(--color-success); }
+.bg-mindful { background-color: var(--brand-indigo); }
+.bg-near-limit { background-color: var(--color-warning); }
+.bg-exceeded { background-color: var(--color-danger); }
+
+/* Input Styles */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-btn);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 16px;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--brand-indigo);
+}
